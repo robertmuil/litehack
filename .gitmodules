@@ -1,0 +1,3 @@
+[submodule "python-acpi"]
+	path = pythonacpi
+	url = git@github.com:robertmuil/python-acpi.git

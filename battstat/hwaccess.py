@@ -1,7 +1,7 @@
 #Very simple interface to grab hardware information
 import os, socket
 import subprocess
-import acpi #this is just a helper package to parse the 'acpi' binary's output (https://github.com/ondrejsika/python-acpi - it's also in PyPI)
+from pythonacpi import acpi #this is just a helper package to parse the 'acpi' binary's output (https://github.com/ondrejsika/python-acpi - it's also in PyPI)
 
 use_acpi_binary = True
 
