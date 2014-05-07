@@ -2,21 +2,23 @@ from django.db import models
 
 # Create your models here.
 class Batt(models.Model):
-	name = models.CharField(max_length=200)
-	mfr_date = models.DateTimeField('date manufactured')
+	name = models.CharField(max_length=200,unique=True)
+	level = models.IntegerField(blank=True,null=True)
+	status = models.CharField(max_length=200,blank=True,null=True)
+	uptime = models.CharField(max_length=200,blank=True,null=True)
+	str_uptime = models.CharField(max_length=200,blank=True,null=True)
+	last_updated = models.DateTimeField('date updated',auto_now=True)
 
 	def __unicode__(self):
-		return '%s (%s)'%(self.name, self.mfr_date)
+		retstr = '%s'%(self.name)
+		if self.level is not None:
+			retstr += '@ %d%%'%(self.level)
+		if self.status is not None:
+			retstr += ', %s' % (self.status)
+		if self.last_updated is not None:
+			retstr += ' (last updated %s)'%(self.last_updated)
 
-#This isn't the best way to do this... we don't need to presere this
-# information
-class Status(models.Model):
-	batt = models.ForeignKey(Batt)
-	status_text = models.CharField(max_length=200)
-	percent_full = models.IntegerField(default=0)
-
-	def __unicode__(self):
-		return 'status of %s: %d%% (%s)'%(self.batt.name, self.percent_full, self.status_text)
+		return retstr
 
 	def is_full(self):
-		return self.percent_full > 99
+		return self.level > 99
