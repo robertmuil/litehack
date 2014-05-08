@@ -92,7 +92,7 @@ def get_batt_html():
 	for bat in batteries:
 		respstr += "<li>"
 		respstr += "<b>%s</b>: status is %s (%d%%)"%(bat.name, str(bat.status), bat.level)
-		respstr += ", remaining time is " + (("%s (%d seconds)"%bat[3:5]) if (bat.uptime is not None) else unknownstr)
+		respstr += ", remaining time is " + (("%s (%d seconds)"%(bat.str_uptime, bat.uptime) if (bat.uptime is not None) else unknownstr)
 		respstr += ' <font color="green">(last updated %s)</font>' % (now if not hasattr(bat, 'last_updated') else bat.last_updated)
 		respstr += "</li>"
 		respstr += "</ul>"

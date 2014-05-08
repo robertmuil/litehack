@@ -6,13 +6,16 @@ This implements an asynchronous design in that the hardware status is maintained
 
 The web application then merely displays the information from the DataBase, and uses AJAX to keep the relevant sections of the HTML page up to date (currently 2 minute refresh for battery).
 
-To use this, one must have the following installed:
+To use this, the following must be installed:
  1. `django`
  1. `acpi`
 
 This project makes use of the python-acpi parser project, but this is included as a submodule and so need not be manually installed.
 
 ## Quick start
+ 1. clone this repository
+ 1. go into base litehack directory
+ 1. get the submodules (`git submodule update --init`)
  1. `python manage.py hwupdate start &`
  1. `python manage.py runserver 0.0.0.0:8000`
  1. point browser at http://localhost:8000/batteries
