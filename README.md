@@ -2,10 +2,15 @@
 
 Simple Django-based Web App for displaying battery and wifi status (written for LiteElements job application)
 
+(NB: wifi status not yet implemented.)
+
 This implements an asynchronous design in that the hardware status is maintained in a DataBase table separately from the server process. This is accomplished with the hwupdate.py management command (which is just a loop that probes the hardware and updates the DataBase). The hwupdate loops with a period of 0.5seconds currently, but is configurable.
 
 The web application then merely displays the information from the DataBase, and uses AJAX to keep the relevant sections of the HTML page up to date (currently 2 minute refresh for battery).
 
+The asynchronous aspect of the hardware querying is important to avoid the need for any HTML request from a client blocking on server IO. It also allows the IO to be conducted efficiently, doing system checks and file opens only when required rather than on each request, while also allowing the possibility for the HTML interface to be RESTful (RESTfulness is not guaranteed here, but is made more easy by the separation of concerns (splitting hardware access and HTML serving).
+
+## Required packages
 To use this, the following must be installed:
  1. `django`
  1. `acpi`
