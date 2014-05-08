@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+"""
+Code from http://hackoftheday.securitytube.net/2013/03/wi-fi-sniffer-in-10-lines-of-python.html
+"""
 from scapy.all import *
 ap_set = set()
 
